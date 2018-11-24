@@ -21,14 +21,14 @@ class Context:
                     for injected, defined in mapper_dictionary.items()
                 }
 
-                parameters_list = (
+                parameters_list = list(
                     self.definition[defined] for defined in mapper_list
                 )
 
                 @wraps(func)
                 def injected(*additional_list, **additional_dictionary):
                     return substituted_function(
-                        func, list(parameters_list), list(additional_list), parameters_dictionary, additional_dictionary
+                        func, parameters_list, list(additional_list), parameters_dictionary, additional_dictionary
                     )
 
                 return injected
